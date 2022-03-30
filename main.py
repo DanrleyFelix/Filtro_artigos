@@ -29,7 +29,8 @@ keywords_level_1 = ['rfid', 'humidity sensor', 'weight sensor', 'communication',
 keywords_level_2 = ['electronic', 'iot', 'internet of things','neural network', 'neural networks', 'tensor flow']
 keywords_level_3 = ['arduino', 'raspberry', 'tiva c', 'microprocessor', 'microcontroller', 'scikit learn', 'embedded system']
 keywords_level_4 = ['video processing', 'images processing', 'videos processing', 'image processing', 'processing image', 'processing video']
-keywords_level_5 = ['yolo', 'opencv', 'pytorch', 'artificial itelligence', 'machine learning', 'monitoring system', 'data acquisition',]
+keywords_level_5 = ['yolo', 'opencv', 'pytorch', 'artificial itelligence', 'machine learning', 'monitoring system', 'data acquisition',
+                    'deep learning']
 keywords_lista = [keywords_level_5, keywords_level_4, keywords_level_3, keywords_level_2, keywords_level_1, keywords_level_0]
 
 def condicao_classificacao(x):
@@ -84,7 +85,7 @@ df_alinhados['Selecionados'] = df_alinhados['Recente'] + df_alinhados['Pareto'] 
 # Filtro geral
 
 df_alinhados = df_alinhados[(df_alinhados['Selecionados'] >= 1) & (df_alinhados['AB alinhado'] > 0)]
-df_alinhados['Pontuação'] = (1.25*df_alinhados['Cit perc.']+0.1)*(3*df_alinhados['Recente'] + 0.85*df_alinhados['AB alinhado'])
+df_alinhados['Pontuação'] = (1.25*df_alinhados['Cit perc.']+0.1)*(3*df_alinhados['Recente'] + 0.95*df_alinhados['AB alinhado'])
 df_alinhados = df_alinhados.sort_values(by='Pontuação', ascending=False)
 
 # Dataframe a ser convertido para xlsx
