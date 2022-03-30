@@ -1,6 +1,6 @@
-((bee OR bees OR beehive OR colony OR colonies) AND (AI OR artificial inteligence OR monitoring system OR image processing 
-OR yolo OR opencv OR pytorch OR neural networks OR scikit learn OR IOT OR internet of things OR electronic OR temperature detection
-OR detecting temperature OR detecting sounds OR sound detection OR remote system OR arduino OR microcontroller OR microprocessor
-OR machine learn OR data acquisition))
+((bee OR bees OR beehive OR honeybee) AND (AI OR artificial inteligence OR monitoring OR image processing OR yolo OR opencv
+OR sensor OR neural network OR iot OR internet of things OR electronic OR detecting OR embedded system OR processing image
+OR arduino OR microcontroller OR microprocessor OR processing video OR detection model OR video processing
+OR machine learning OR data acquisition OR scikit OR real-time OR audio processing OR computer vision OR videos processing))
 
-base de dados: WOS
+Base de dados: WOS

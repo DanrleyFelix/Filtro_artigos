@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_excel('Book.xlsx')
+df = pd.read_excel('articles.xlsx')
 
 # Alinhar resumos
 
@@ -10,8 +10,8 @@ filtro_2 = 'electronic|arduino|microprocessor|microcontroller|processing video|\
         humidity sensor|temperature sensor|sound sensor|weight sensor|sensor|audio sensor|\
         image processing|images processing|video processing|videos processing|iot|\
         internet of things|yolo|opencv|neural networks|communication|rfid|prediction|\
-        artificial intelligence|data acquisition|monitoring system||python|processing image| AI '\
-        'bee detection|bees detection|detecting bee|embedded system|computer vision|detecion model|\
+        artificial intelligence|data acquisition|monitoring system||python|processing image| AI |video processing|'\
+        'bee detection|bees detection|detecting bee|embedded system|computer vision|detecion model|processing image|\
         audio detection|detecting audio|audio processing|processing audio|real-time system|real-time monitoring|scikit-learn'
 
 # Alinhar títulos e resumos
@@ -56,9 +56,9 @@ for indice, item in zip(df_alinhados.index, df_alinhados['Cit perc.']):
     else:
         df_alinhados.loc[indice, 'Pareto'] = 1
 
-# Se PY >= 2021 => Recente
+# Se PY >= 2020 => Recente
 
-df_alinhados['Recente'] = df['PY'].apply(lambda x: 1 if x >= 2021 else 0)
+df_alinhados['Recente'] = df['PY'].apply(lambda x: 1 if x >= 2020 else 0)
 
 # Repescagem de autores
 
@@ -93,6 +93,6 @@ df_alinhados = df_alinhados.sort_values(by='Pontuação', ascending=False)
 
 df_alinhados_convertido = df_alinhados[['TI', 'TC', 'PY', 'Pontuação']]
 print(len(df_alinhados_convertido))
-df_alinhados_convertido.to_excel('artigos_filtrados.xlsx', sheet_name='proknow-c')
+df_alinhados_convertido.to_excel('artigos_filtrados_2.xlsx', sheet_name='proknow-c')
 
-# Total: 40 artigos. Base de dados: Web of science
+# Total: 81 artigos. Base de dados: Web of science
