@@ -4,33 +4,34 @@ df = pd.read_excel('Book.xlsx')
 
 # Alinhar resumos
 
-filtro_1 = 'bee |beehive|bees |colonies bee|colony bee'
+filtro_1 = 'bee |beehive|bees |colonies bee|colony bee|honeybee|colony-bee'
 filtro_2 = 'electronic|arduino|microprocessor|microcontroller|processing video|\
         tiva c|scikit learn|tensor flow|pytorch|machine learning||neural network|\
-        humidity sensor|temperature sensor|sound sensor|weight sensor|sensor|\
+        humidity sensor|temperature sensor|sound sensor|weight sensor|sensor|audio sensor|\
         image processing|images processing|video processing|videos processing|iot|\
-        internet of things|yolo|opencv|neural networks|communication|rfid|\
-        artificial intelligence|data acquisition|monitoring system||python|processing image|'\
-        'bee detection|bees detection|detecting bee|embedded system'
+        internet of things|yolo|opencv|neural networks|communication|rfid|prediction|\
+        artificial intelligence|data acquisition|monitoring system||python|processing image| AI '\
+        'bee detection|bees detection|detecting bee|embedded system|computer vision|detecion model|\
+        audio detection|detecting audio|audio processing|processing audio|real-time system|real-time monitoring|scikit-learn'
 
-df_alinhados = df[df['Abstract'].str.contains(filtro_1, case=False)]
-df_alinhados = df_alinhados[df_alinhados['Abstract'].str.contains(filtro_2, case=False)]
+# Alinhar títulos e resumos
 
-# Alinhar títulos
-
-df_alinhados = df_alinhados[df_alinhados['TI'].str.contains(filtro_1, case=False)]
-df_alinhados = df_alinhados[df_alinhados['TI'].str.contains(filtro_2, case=False)]
+df_alinhados = df[df['TI'].str.contains(filtro_1, case=False) & df['TI'].str.contains(filtro_2, case=False)]
+df_alinhados = df_alinhados[df_alinhados['Abstract'].str.contains(filtro_1, case=False) & df_alinhados['Abstract'].str.contains(filtro_2, case=False)]
 
 # Classificar os resumos: 0 - mal alinhado e 5 - Bem alinhado
 
 classificacao = [5, 4, 3, 2, 1 , 0]
 keywords_level_0 = [' ']
-keywords_level_1 = ['rfid', 'humidity sensor', 'weight sensor', 'communication', 'temperature sensor', 'sound sensor']
-keywords_level_2 = ['electronic', 'iot', 'internet of things','neural network', 'neural networks', 'tensor flow']
-keywords_level_3 = ['arduino', 'raspberry', 'tiva c', 'microprocessor', 'microcontroller', 'scikit learn', 'embedded system']
-keywords_level_4 = ['video processing', 'images processing', 'videos processing', 'image processing', 'processing image', 'processing video']
-keywords_level_5 = ['yolo', 'opencv', 'pytorch', 'artificial itelligence', 'machine learning', 'monitoring system', 'data acquisition',
-                    'deep learning']
+keywords_level_1 = ['rfid', 'humidity sensor', 'weight sensor', 'communication', 'temperature sensor', 'sound sensor', 'audio sensor', 
+                    'audio processing', 'processing audio', 'detecting audio', 'audio detection', 'prediction']
+keywords_level_2 = ['electronic', 'iot', 'internet of things', 'tensor flow', 'detection model', 'bee detection', 'bees detection', 'detecting bee']
+keywords_level_3 = ['arduino', 'raspberry', 'tiva c', 'microprocessor', 'microcontroller', 'embedded system', 'pil ',
+                    'neural networks','real-time system', 'real-time monitoring', 'neural network', ' AI ']
+keywords_level_4 = ['video processing', 'images processing', 'videos processing', 'image processing', 'processing image', 'processing video',
+                    'pillow']
+keywords_level_5 = ['yolo', 'opencv', 'pytorch', 'monitoring system', 'data acquisition', 'deep learning', 'computer vision',
+                    'scikit-learn', 'scikit learn', 'machine learning', 'artificial intelligence']
 keywords_lista = [keywords_level_5, keywords_level_4, keywords_level_3, keywords_level_2, keywords_level_1, keywords_level_0]
 
 def condicao_classificacao(x):
@@ -85,7 +86,7 @@ df_alinhados['Selecionados'] = df_alinhados['Recente'] + df_alinhados['Pareto'] 
 # Filtro geral
 
 df_alinhados = df_alinhados[(df_alinhados['Selecionados'] >= 1) & (df_alinhados['AB alinhado'] > 0)]
-df_alinhados['Pontuação'] = (1.25*df_alinhados['Cit perc.']+0.1)*(3*df_alinhados['Recente'] + 0.95*df_alinhados['AB alinhado'])
+df_alinhados['Pontuação'] = (df_alinhados['Cit perc.']+ df_alinhados['Selecionados'] + 5)*(df_alinhados['AB alinhado'])
 df_alinhados = df_alinhados.sort_values(by='Pontuação', ascending=False)
 
 # Dataframe a ser convertido para xlsx
