@@ -94,4 +94,4 @@ df_alinhados_convertido = df_alinhados[['TI', 'TC', 'PY', 'Pontuação']]
 print(len(df_alinhados_convertido))
 df_alinhados_convertido.to_excel('artigos_filtrados.xlsx', sheet_name='proknow-c')
 
-# Total: 35 artigos. Base de dados: Web of science
+# Total: 36 artigos. Base de dados: Web of science
